@@ -1,0 +1,112 @@
+var isPlaying = true;
+
+function getInput() {
+   // console.log("Please choose either 'rock', 'paper', or 'scissors'.")
+    return prompt("Please choose either 'rock', 'paper', or 'scissors'.");
+}
+function randomPlay() {
+    var randomNumber = Math.random();
+    if (randomNumber < 0.33) {
+        return "rock";
+    } else if (randomNumber < 0.66) {
+        return "paper";
+    } else {
+        return "scissors";
+    }
+}
+function getPlayerMove(move) {
+	
+    if (move !== null)
+    {
+    	move = getInput();
+    	if (move === 'rock' || move === 'paper' || move === 'scissors'){
+	    	console.log("Your move: " + move);
+	    }
+	    else if (move === 'exit'){
+	    	isPlaying = false;
+	    }
+	    else{
+	    	window.alert("Invalid entry. Please choose either 'rock', 'paper', or 'scissors'.");
+	    	//getWinner();
+	    }
+	    
+    }
+    return move;
+}
+function getComputerMove(move) {
+    	move = randomPlay();
+    	window.alert("Computer's move: " + move);
+    	return move;
+}
+function getWinner(playerMove, computerMove) {
+	var winner;
+	playerMove = getPlayerMove();
+	
+	if (playerMove === 'rock' || playerMove === 'paper' || playerMove === 'scissors'){
+		computerMove = getComputerMove();
+	}
+	
+	//computerMove = getComputerMove();
+	if (playerMove === computerMove)
+    {
+    	winner = 'tie';
+    	//console.log('tie');
+    }
+    else if (playerMove === 'rock' && computerMove === 'scissors'||
+    			playerMove === 'scissors' && computerMove === 'paper'||
+    			playerMove === 'paper' && computerMove  === 'rock')
+    {
+    	winner = 'player';
+    	//console.log('player');
+    }
+     else if (	computerMove === 'rock' && playerMove === 'scissors'||
+    			computerMove === 'scissors' && playerMove === 'paper'||
+    			computerMove === 'paper' && playerMove  === 'rock')
+	{
+		winner = 'computer';
+		//console.log('computer');
+	}
+    return winner;
+}
+	
+
+function playToFive(){
+	var winner;
+	var playerWins = 0;
+	var computerWins = 0;
+	
+	window.alert("Let's play Rock, Paper, Scissors!");
+	while (playerWins < 5 && computerWins < 5 && isPlaying === true){
+		winner = getWinner();
+		if (winner === 'player'){
+			console.log("You won!");
+			playerWins ++;
+			console.log("Player Wins: " + playerWins + ", Computer Wins: " + computerWins);
+			window.alert("You won! Player Wins: " + playerWins + ", Computer Wins: " + computerWins);
+		}
+		else if (winner === 'computer'){
+			console.log("Computer won!");
+			computerWins ++;
+			console.log("Player Wins: " + playerWins + ", Computer Wins: " + computerWins);
+			window.alert("Sorry you lost :( Player Wins: " + playerWins + ", Computer Wins: " + computerWins);
+		}
+		else if (winner === 'tie'){
+			console.log("Tie!");
+			console.log("Player Wins: " + playerWins + ", Computer Wins: " + computerWins);
+			window.alert("Tie! Player Wins: " + playerWins + ", Computer Wins: " + computerWins);
+		}
+	}
+	if (playerWins >= 5){
+			window.alert("You won best of 5!");
+		}
+	else if (computerWins >= 5){
+			window.alert("Computer won best of 5!");
+		}
+		
+	
+	
+}
+//getPlayerMove();
+//getComputerMove();
+
+playToFive();
